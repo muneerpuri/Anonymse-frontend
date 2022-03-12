@@ -1,0 +1,134 @@
+.profile {
+  width: calc(100% - 10%);
+  margin: auto;
+  }
+  
+  .profileWrapper {
+    padding: 10px;
+  }
+  .avatarImgBox{
+    position: relative;
+    padding: 5px;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #d6249f;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+  }
+  .pencil{
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    cursor: pointer;
+  }
+  .avatarImg{
+    height: 150px;
+    border-radius: 50%;
+  }
+  .profileBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .profileAvatar{
+    width: 30%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+  }
+  .infoModule{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .infoStats{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .followMessageBox{
+    width: 100%;
+  }
+
+  .stat{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .logoutLink{
+    color: rgb(0,149,246);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+
+  }
+  .number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    font-family: 'Pacifico', cursive;
+
+  }
+  .Name{
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Pacifico', cursive;
+
+  }
+  .userInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    font-family: 'Bebas Neue', cursive;
+  }
+
+  .username{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    font-family: 'Bebas Neue', cursive;
+  }
+  
+
+.dataBoxComponent{
+  width: 100%;
+}
+
+  @media all and (max-width:700px){
+    .avatarImg{
+      height: 80px;
+    }
+    .username{
+      font-size: 14px;
+    }
+    .Name{
+      font-size: 14px;
+    }
+    .number{
+      font-size: 14px;
+    }
+  }

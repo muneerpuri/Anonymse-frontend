@@ -1,0 +1,52 @@
+
+.searchBoxContainer{
+    width: 100%;
+    height: 100vh;
+
+}
+
+
+.searchBox{
+    width: 100%;
+    border: 1px solid rgb(219,219,219); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .inputSearch{
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: none;
+  }
+  .searchIcon{
+    padding: 0 5px;
+  }
+  
+  .searchItem{
+    width: 100%;
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 2px 2px  rgb(219,219,219); 
+    margin: 10px auto;
+    cursor: pointer;
+  }
+  .avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  .avatarImg{
+    height: 30px;
+    object-fit: contain;
+  }
+  
+  .username{
+  
+    font-family: 'Smooch Sans', sans-serif;
+    font-size: 20px;
+  }

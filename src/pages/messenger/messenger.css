@@ -1,0 +1,150 @@
+.messengerNav{
+  width: 100%;
+  background: black;
+  border: 1px solid black;
+  display: flex;
+  color: white;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.chatBox{
+  width: calc(100% - 10%);
+  height: 500px;
+  overflow-y: hidden;
+  margin: auto;
+}
+.userChat{
+  width: 90%;
+  padding: 10px;
+  color: black;
+  text-decoration: underline;
+  background: white;
+  font-size: 30px;
+  font-family: 'Pacifico', cursive;
+}
+.messengerChatItem{
+  padding: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.chatMenuInput {
+  width: 90%;
+  padding: 10px 0;
+  border: none;
+  border: 1px solid rgb(219,219,219);
+  outline: none;
+  padding: 10px;
+
+}
+
+
+
+.chatBoxWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.chatBoxTop {
+  height: 100%;
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+
+.chatBoxBottom {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatMessageInput {
+  width: 80%;
+  height: 90px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.mainQuestionText{
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid black;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.chatSubmitButton {
+  width: 70px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: teal;
+  color: white;
+}
+
+.chatOnline {
+  flex: 3;
+}
+.inputBox{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0;
+}
+.resultBox{
+  width: 100%;
+  height: 200px;
+  overflow-y: scroll;
+  z-index: 999;
+  background: white;
+}
+.chatMenuWrapper,
+.chatBoxWrapper,
+.chatOnlineWrapper {
+  padding: 10px;
+  height: 100%;
+}
+
+.noConversationText {
+  position: absolute;
+  top: 10%;
+  font-size: 50px;
+  color: rgb(224, 220, 220);
+  cursor: default;
+}
+.searchItem{
+  width: 90%;
+  padding: 5px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid  rgb(219,219,219); 
+  margin: 10px auto;
+  cursor: pointer;
+}
+.avatar{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.avatarImg{
+  height: 30px;
+  object-fit: contain;
+}
+
+.username{
+
+  font-family: 'Smooch Sans', sans-serif;
+  font-size: 20px;
+}
+
+

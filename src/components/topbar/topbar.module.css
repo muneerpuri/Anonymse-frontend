@@ -1,0 +1,127 @@
+@import url('//fonts.cdnfonts.com/css/billabong');
+.topbarContainer {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  justify-content: space-around;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.navLogo{
+  font-size: 40px;
+  font-family: "billabong", sans-serif;
+  font-weight: bold;
+}
+.parentSearchBox{
+  position: relative;
+
+  width: 20%;
+}
+.searchItemBox{
+  border: 1px solid rgb(219,219,219); 
+  padding: 10px 5px;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 9999;
+  background: white;
+  width: 100%;
+  height: 200px;
+  overflow-y: scroll;
+}
+.searchBox{
+
+  width: 100%;
+  border: 1px solid rgb(219,219,219); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inputSearch{
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: none;
+}
+.searchIcon{
+  padding: 0 5px;
+}
+
+.navIcons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navIconsImage{
+  cursor: pointer;
+}
+
+
+.navIconsLinks{
+  display: flex;
+  color: black;
+  background: white;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+.activeLink{
+  background: black;
+  color: white !important;
+  cursor: pointer;
+}
+.navIconsImageSearch{
+  color: black;
+  cursor: pointer;
+}
+.navIconsImageSearch:hover{
+  background: black;
+  color: white;
+}
+
+
+.hideIcon{
+  display: none;
+
+}
+.searchItem{
+  width: 100%;
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 2px 2px  rgb(219,219,219); 
+  margin: 10px auto;
+  cursor: pointer;
+}
+.avatar{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.avatarImg{
+  height: 30px;
+  object-fit: contain;
+}
+
+.username{
+
+  font-family: 'Smooch Sans', sans-serif;
+  font-size: 20px;
+}
+
+@media all and (max-width:700px){
+  .hideIcon{
+    display: block;
+  
+  }
+  .searchBox{
+    display: none;
+  }
+}

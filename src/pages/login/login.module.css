@@ -1,0 +1,63 @@
+@import url('//fonts.cdnfonts.com/css/billabong');
+.root{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.formBodyBox{
+  width: fit-content;
+  border: 1px solid rgb(219,219,219);
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.inputField{
+  border: 1px solid rgb(219,219,219);
+  background: transparent;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 5px;
+  outline: none;
+
+}
+.logoName{
+  font-family: "billabong", sans-serif;
+  font-weight: bold;
+  padding: 20px;
+  font-size: 40px;
+
+
+}
+
+.btn{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin: 15px;
+  background: rgb(0,149,246);
+  color: white;
+  cursor: pointer;
+}
+.orBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.lin{
+  display: flex;
+  margin: 0 10px;
+  width: 100%;
+  height: 1px;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid rgb(168,146,142);
+}

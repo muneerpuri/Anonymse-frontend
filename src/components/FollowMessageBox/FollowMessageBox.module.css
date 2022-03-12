@@ -1,0 +1,47 @@
+.btnBox{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding:0 20px;
+}
+
+
+.follow{
+    padding: 10px;
+  border: none;
+  width: 30%;
+  border-radius: 5px;
+  background: rgb(0,149,246);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Pacifico', cursive;
+}
+
+.message{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    width: 30%;
+    border-radius: 5px;
+    background: rgb(0,149,246);
+    color: white;
+    cursor: pointer;
+    font-family: 'Pacifico', cursive;
+}
+
+
+
+@media all and (max-width:700px){
+    .message{
+        font-size: 14px;
+
+    }
+    .follow{
+        font-size: 14px;
+
+    }
+  }

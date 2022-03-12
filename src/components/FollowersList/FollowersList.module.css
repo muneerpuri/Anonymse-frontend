@@ -1,0 +1,22 @@
+.parentBox{
+    width: calc(100% - 10%);
+    margin: auto;
+    padding: 20px 0;
+}
+
+.bodyItem{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid rgb(219,219,219);
+    padding: 20px;
+}
+.bodyItemImage{
+    height: 80px;
+    border-radius: 50%;
+}
+
+.bodyItemName{
+    font-size: 20px;
+    font-family: 'Bebas Neue', cursive;
+}
