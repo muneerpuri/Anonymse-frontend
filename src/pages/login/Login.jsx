@@ -20,7 +20,6 @@ export default function Login() {
   };
 
   return (
-
         <div className={classes.root}>
           <form className={classes.formBodyBox} onSubmit={handleClick}>
           <div className={classes.logoName}>Anonymse</div>
