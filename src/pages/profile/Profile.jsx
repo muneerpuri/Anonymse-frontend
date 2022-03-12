@@ -28,7 +28,7 @@ export default function Profile() {
   useEffect(() => {
     setRefetch(false);
     const fetchUser = async () => {
-      const res = await axios.get(`/users?username=${username}`);
+      const res = await axios.get(`https://anonymse-backend.herokuapp.com/api/users?username=${username}`);
       setUser(res.data);
     };
     fetchUser();
@@ -46,12 +46,12 @@ export default function Profile() {
         data.append("file", fileToUpload);
         newPost.profilePicture = fileName;
         try {
-          await axios.post("/upload", data);
+          await axios.post("https://anonymse-backend.herokuapp.com/api/upload", data);
         } catch (err) {}
       }
       setLoading(true);
       try {
-        await axios.put(`/users/${currentUser._id}`, newPost);
+        await axios.put(`https://anonymse-backend.herokuapp.com/api/users/${currentUser._id}`, newPost);
         addToast("Picture updated!", { appearance: "success" });
         setLoading(false);
       } catch (err) {

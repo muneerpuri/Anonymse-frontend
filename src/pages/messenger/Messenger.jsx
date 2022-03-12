@@ -28,7 +28,7 @@ export default function Messenger() {
     setLoading(true);
     try {
       const friendList = await axios.get(
-        `users/messengerchat/` + user._id + `?name=${val}`
+        `https://anonymse-backend.herokuapp.com/api/users/messengerchat/` + user._id + `?name=${val}`
       );
       setFriends(friendList.data);
       setLoading(false);
@@ -40,7 +40,7 @@ export default function Messenger() {
   const chatUserId = async (val)=>{
     setLoading(true);
     try {
-      const res = await axios.get(`/users/chat/${val}`);
+      const res = await axios.get(`https://anonymse-backend.herokuapp.com/api/users/chat/${val}`);
       setLoading(false);
       setActiveChatUser(res.data)
       console.log(res.data)
@@ -52,7 +52,7 @@ export default function Messenger() {
   const setConversationRevealed = async (val)=>{
     setLoading(true)
     try{
-      let res =await axios.put(`/conversations/${val}`, {
+      let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${val}`, {
         revealed: true
       })
       setCurrentChat(res.data)
@@ -71,7 +71,7 @@ export default function Messenger() {
     }
     setLoading(true);
     try {
-      const res = await axios.post("/conversations", userObj);
+      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/conversations", userObj);
       setLoading(false);
       setActiveTab(2)
       setChatStarted(true)
@@ -110,7 +110,7 @@ export default function Messenger() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/conversations/" + user._id);
+        const res = await axios.get("https://anonymse-backend.herokuapp.com/api/conversations/" + user._id);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -123,7 +123,7 @@ export default function Messenger() {
     setChatStarted(false)
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + currentChat?._id);
+        const res = await axios.get("https://anonymse-backend.herokuapp.com/api/messages/" + currentChat?._id);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -150,7 +150,7 @@ export default function Messenger() {
     });
 
     try {
-      const res = await axios.post("/messages", message);
+      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -176,7 +176,7 @@ export default function Messenger() {
     });
 
     try {
-      const res = await axios.post("/messages", message);
+      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -202,7 +202,7 @@ export default function Messenger() {
     });
 
     try {
-      const res = await axios.post("/messages", message);
+      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
