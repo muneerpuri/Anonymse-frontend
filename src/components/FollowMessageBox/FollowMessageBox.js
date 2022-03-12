@@ -1,20 +1,18 @@
 import React from 'react'
 import classes from './FollowMessageBox.module.css'
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { Add, Remove } from "@material-ui/icons";
 
 import { CircularProgress } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
 
 
 function FollowMessageBox({user}) {
-    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(false);
   const [loading,setLoading] = useState(false);
+  console.log(friends)
   useEffect(() => {
     if(currentUser.followings.includes(user?._id)){
       setFollowed(true)
