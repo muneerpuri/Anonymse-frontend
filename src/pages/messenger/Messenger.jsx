@@ -57,6 +57,7 @@ export default function Messenger() {
       })
       setCurrentChat(res.data)
       setLoading(false)
+      shownIdentityMessage();
 
     }catch (err) {
       console.log(err);
@@ -73,7 +74,8 @@ export default function Messenger() {
     try {
       const res = await axios.post("https://anonymse-backend.herokuapp.com/api/conversations", userObj);
       setLoading(false);
-      setActiveTab(2)
+      setCurrentChat(res)
+      setActiveTab(3)
       setChatStarted(true)
     } catch (err) {
       setLoading(false);
@@ -298,7 +300,7 @@ export default function Messenger() {
                   {currentChat.revealed?null:
                   currentChat.members[0] === user._id ?<span className="mainQuestionText" onClick={()=>{
                     setConversationRevealed(currentChat._id);
-                    shownIdentityMessage();
+                    
                   }}>{loading?<CircularProgress size={10} color="black"/>:`Reveal yourself`}</span>:<span className="mainQuestionText" onClick={askForIdentity}>Ask for identity!</span>
                   
                   }
