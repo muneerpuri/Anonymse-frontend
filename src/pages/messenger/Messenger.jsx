@@ -25,6 +25,7 @@ export default function Messenger() {
   const [showSearchBox, setShowSearchbox] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [chatStarted,setChatStarted] = React.useState(false)
+  const [messageChange,setMessageChange] = React.useState(false)
   const getFriends = async (val) => {
     setLoading(true);
     try {
@@ -52,6 +53,7 @@ export default function Messenger() {
   }
 
   useEffect(async ()=>{
+    setMessageChange(false)
     if(currentChat){
 
       setLoading(true)
@@ -69,7 +71,7 @@ export default function Messenger() {
       
       
     }
-  },[messages])
+  },[messageChange])
 
   const startAnewConversation = async (val)=>{
     
@@ -149,6 +151,7 @@ export default function Messenger() {
   }, [currentChat,activeTab,chatStarted]);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessageChange(true)
     const message = {
       sender: user._id,
       text: newMessage,
