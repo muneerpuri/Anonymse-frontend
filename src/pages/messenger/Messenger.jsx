@@ -9,6 +9,7 @@ import { io } from "socket.io-client";
 import { CircularProgress } from "@material-ui/core";
 import React from "react";
 export default function Messenger() {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [conversations, setConversations] = useState([]);
   const [activeTab,setActiveTab] = useState(0);
   const [currentChat, setCurrentChat] = useState(null);
@@ -249,7 +250,7 @@ export default function Messenger() {
           chatUserId(el._id)
       }}>
         <div className="avatar">
-          <img src={el.profilePicture?el.profilePicture:"https://cdn.landesa.org/wp-content/uploads/default-user-image.png"} className="avatarImg" alt="avatar"/>
+          <img src={el.profilePicture?PF+el.profilePicture:"https://cdn.landesa.org/wp-content/uploads/default-user-image.png"} className="avatarImg" alt="avatar"/>
         </div>
         <div className="username">{el.username}</div>
       </div>
