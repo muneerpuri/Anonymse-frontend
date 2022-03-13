@@ -101,7 +101,7 @@ export default function Messenger() {
 
     await setActiveTab(3)
   }
-  useEffect(() => {
+  useEffect(async () => {
     socket.current = io("https://anonymse-chat-backend.herokuapp.com/",{ transports : ['websocket'] });
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
