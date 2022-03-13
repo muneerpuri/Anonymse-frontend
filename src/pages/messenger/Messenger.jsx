@@ -102,6 +102,10 @@ export default function Messenger() {
         text: data.text,
         createdAt: Date.now(),
       });
+
+      if(data.text === "Who are you? reveal yourself!!" || data.text === "I just reveled myself, refresh your page"){
+           setChatStarted(true)
+      }
     });
   }, []);
 
