@@ -50,21 +50,28 @@ export default function Messenger() {
       console.log(err);
     }
   }
-  const setConversationRevealed = async (val)=>{
-    setLoading(true)
-    try{
-      let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${val}`, {
-        revealed: true
-      })
-      setCurrentChat(res.data)
-      setLoading(false)
-      window.location.reload();
 
-    }catch (err) {
-      console.log(err);
-      setLoading(false)
+  useEffect(async ()=>{
+    if(currentChat){
+
+      setLoading(true)
+      try{
+        let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
+          revealed: true
+        })
+        setCurrentChat(res.data)
+        setLoading(false)
+        window.location.reload();
+        
+      }catch (err) {
+        console.log(err);
+        setLoading(false)
+      }
+      
+      
     }
-  }
+  },[messages])
+
   const startAnewConversation = async (val)=>{
     
     let userObj={
@@ -193,8 +200,8 @@ export default function Messenger() {
       console.log(err);
     }
   };
-  const shownIdentityMessage = async (e) => {
-    e.preventDefault();
+  const shownIdentityMessage = async () => {
+   
     const message = {
       sender: user._id,
       text: "I just reveled myself, refresh your page",
@@ -215,7 +222,19 @@ export default function Messenger() {
         const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
         setMessages([...messages, res.data]);
         setNewMessage("");
-        setConversationRevealed(currentChat._id)
+        setLoading(true)
+        try{
+          let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
+            revealed: true
+          })
+          setCurrentChat(res.data)
+          setLoading(false)
+          window.location.reload();
+    
+        }catch (err) {
+          console.log(err);
+          setLoading(false)
+        }
       } catch (err) {
         console.log(err);
     }
