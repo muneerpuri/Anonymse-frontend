@@ -56,7 +56,7 @@ export default function Topbar() {
             {loading ? (
              <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}> <CircularProgress color="black" size={20} /></div>
             ) : (
-              data.length? data.map((e)=>{
+              data.length > 0? data.map((e)=>{
                 return <div className={classes.searchItem} onMouseDown={()=>{
                   history.push(`/profile/${e.username}`)
                 }}>
