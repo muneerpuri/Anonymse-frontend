@@ -26,6 +26,7 @@ export default function Messenger() {
   const [loading, setLoading] = React.useState(false);
   const [chatStarted,setChatStarted] = React.useState(false)
   const [messageChange,setMessageChange] = React.useState(false)
+  const [showBtn,setShowBtn] = React.useState(false)
   const getFriends = async (val) => {
     setLoading(true);
     try {
@@ -105,6 +106,7 @@ export default function Messenger() {
 
       if(data.text === "Who are you? reveal yourself!!" || data.text === "I just reveled myself, refresh your page"){
            setChatStarted(true)
+           setShowBtn(true)
       }
     });
   }, []);
@@ -346,7 +348,7 @@ export default function Messenger() {
                   value={newMessage}
                   ></textarea>
                   {currentChat?.revealed?null:
-                  currentChat.members[0] === user._id ?currentChat.showRevealButton?<span className="mainQuestionText" onClick={()=>{
+                  currentChat.members[0] === user._id ?currentChat.showRevealButton && showBtn?<span className="mainQuestionText" onClick={()=>{
                     shownIdentityMessage()
                     
                   }}>{loading?<CircularProgress size={10} color="black"/>:`Reveal yourself`}</span>:null:<span className="mainQuestionText" onClick={askForIdentity}>Ask for identity!</span>
