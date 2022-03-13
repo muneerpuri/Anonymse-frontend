@@ -279,7 +279,7 @@ export default function Messenger() {
       {
         activeTab===3? <div className="chatBox">
         <div className="chatBoxWrapper">
-          <div className="userChat">{currentChat.revealed || currentChat.members[0] === user._id?activeChatUser?activeChatUser:null:"Anonymse"}</div>
+          <div className="userChat">{currentChat?.revealed || currentChat?.members[0] === user?._id?activeChatUser?activeChatUser:null:"Anonymse"}</div>
           {currentChat ? (
             <>
               <div className="chatBoxTop">
@@ -298,7 +298,7 @@ export default function Messenger() {
                   onChange={(e) => setNewMessage(e.target.value)}
                   value={newMessage}
                   ></textarea>
-                  {currentChat.revealed?null:
+                  {currentChat?.revealed?null:
                   currentChat.members[0] === user._id ?<span className="mainQuestionText" onClick={()=>{
                     shownIdentityMessage()
                     
