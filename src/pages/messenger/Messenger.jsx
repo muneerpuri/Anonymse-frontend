@@ -110,7 +110,6 @@ export default function Messenger() {
       currentChat?.members.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
 
-    setMessageChange(true)
   }, [arrivalMessage, activeTab,currentChat,chatStarted]);
 
   useEffect(() => {
