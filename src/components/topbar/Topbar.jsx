@@ -28,7 +28,7 @@ export default function Topbar() {
 
   return (
     <div className={classes.topbarContainer}>
-      <div className={classes.navLogo}>Anonymse</div>
+      <div className={classes.navLogo} onClick={()=>history.push('/')}>Anonymse</div>
       <div className={classes.parentSearchBox}>
         <div className={classes.searchBox}>
           <Search className={classes.searchIcon} />
