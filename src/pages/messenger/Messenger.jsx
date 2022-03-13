@@ -341,10 +341,10 @@ export default function Messenger() {
                   value={newMessage}
                   ></textarea>
                   {currentChat?.revealed?null:
-                  currentChat.members[0] === user._id ?<span className="mainQuestionText" onClick={()=>{
+                  currentChat.members[0] === user._id ?currentChat.showRevealButton?<span className="mainQuestionText" onClick={()=>{
                     shownIdentityMessage()
                     
-                  }}>{loading?<CircularProgress size={10} color="black"/>:`Reveal yourself`}</span>:<span className="mainQuestionText" onClick={askForIdentity}>Ask for identity!</span>
+                  }}>{loading?<CircularProgress size={10} color="black"/>:`Reveal yourself`}</span>:null:<span className="mainQuestionText" onClick={askForIdentity}>Ask for identity!</span>
                   
                   }
                   </div>
