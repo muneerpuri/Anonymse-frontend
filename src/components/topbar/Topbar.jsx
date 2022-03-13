@@ -8,6 +8,8 @@ import axios from 'axios';
 import { useHistory } from "react-router";
 export default function Topbar() {
   const history = useHistory();
+
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user, dispatch, showSearchMenu } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
@@ -61,7 +63,7 @@ export default function Topbar() {
                   history.push(`/profile/${e.username}`)
                 }}>
                   <div className={classes.avatar}>
-                    <img src="https://cdn.landesa.org/wp-content/uploads/default-user-image.png" className={classes.avatarImg} alt="avatar"/>
+                    <img src={e.profilePicture?PF+e.profilePicture:"https://cdn.landesa.org/wp-content/uploads/default-user-image.png"} className={classes.avatarImg} alt="avatar"/>
                   </div>
                   <div className={classes.username}>{e.username}</div>
                 </div>
