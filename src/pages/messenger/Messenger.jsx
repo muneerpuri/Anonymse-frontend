@@ -89,7 +89,7 @@ export default function Messenger() {
     await setActiveTab(3)
   }
   useEffect(() => {
-    socket.current = io("https://anonymse-chat-backend.herokuapp.com/");
+    socket.current = io("https://anonymse-chat-backend.herokuapp.com/",{ transports : ['websocket'] });
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
