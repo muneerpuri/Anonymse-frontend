@@ -82,7 +82,7 @@ export default function Messenger() {
     
   }
   useEffect(() => {
-    socket.current = io("ws://anonymse-chat-backend.herokuapp.com/");
+    socket.current = io("https://anonymse-chat-backend.herokuapp.com/");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
