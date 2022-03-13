@@ -103,7 +103,7 @@ export default function Messenger() {
     arrivalMessage &&
       currentChat?.members.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
-  }, [arrivalMessage, currentChat,chatStarted]);
+  }, [arrivalMessage, activeTab,currentChat,chatStarted]);
 
   useEffect(() => {
     socket.current.emit("addUser", user._id);
