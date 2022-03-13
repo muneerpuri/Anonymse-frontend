@@ -114,7 +114,7 @@ export default function Messenger() {
         createdAt: Date.now(),
       });
 
-      if(data.text === "Who are you? reveal yourself!!" || data.text === "I just reveled myself, refresh your page"){
+      if(data.text === "Who are you? reveal yourself!! [send a message to get 'Reveal yoursel button'.]" || data.text === "I just reveled myself, [send a message to find out who am I!!]"){
         setMessageChange(true)
       }
     });
@@ -194,7 +194,7 @@ export default function Messenger() {
     e.preventDefault();
     const message = {
       sender: user._id,
-      text: "Who are you? reveal yourself!!",
+      text: "Who are you? reveal yourself!! [send a message to get 'Reveal yoursel button'.]",
       conversationId: currentChat._id,
     };
 
@@ -205,7 +205,7 @@ export default function Messenger() {
     socket.current.emit("sendMessage", {
       senderId: user._id,
       receiverId,
-      text: "Who are you? reveal yourself!!",
+      text: "Who are you? reveal yourself!! [send a message to get 'Reveal yoursel button'.]",
     });
 
     try {
@@ -236,7 +236,7 @@ export default function Messenger() {
    
     const message = {
       sender: user._id,
-      text: "I just reveled myself, refresh your page",
+      text: "I just reveled myself, [send a message to find out who am I!!]",
       conversationId: currentChat._id,
     };
     
@@ -247,7 +247,7 @@ export default function Messenger() {
       socket.current.emit("sendMessage", {
         senderId: user._id,
         receiverId,
-        text: "I just reveled myself, refresh your page",
+        text:"I just reveled myself, [send a message to find out who am I!!]",
       });
       
       try {
