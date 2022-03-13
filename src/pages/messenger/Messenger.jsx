@@ -26,6 +26,7 @@ export default function Messenger() {
   const [loading, setLoading] = React.useState(false);
   const [chatStarted,setChatStarted] = React.useState(false)
   const [messageChange,setMessageChange] = React.useState(false)
+  const [entireChatLoad,setEntireChatLoad] = React.useState(false)
   const getFriends = async (val) => {
     setLoading(true);
     try {
@@ -55,16 +56,19 @@ export default function Messenger() {
   useEffect(async ()=>{
     setMessageChange(false)
     if(currentChat){
+      setEntireChatLoad(true)
 
       setLoading(true)
       try{
         let res =await axios.get(`https://anonymse-backend.herokuapp.com/api/conversations/single/${currentChat._id}`)
         setCurrentChat(res.data)
         setLoading(false)
-        
+        setEntireChatLoad(false)
       }catch (err) {
         console.log(err);
         setLoading(false)
+
+        setEntireChatLoad(false)
       }
       
       
@@ -111,16 +115,7 @@ export default function Messenger() {
       });
 
       if(data.text === "Who are you? reveal yourself!!" || data.text === "I just reveled myself, refresh your page"){
-        setLoading(true)
-        try{
-          let res =await axios.get(`https://anonymse-backend.herokuapp.com/api/conversations/single/${currentChat._id}`)
-          setCurrentChat(res.data)
-          setLoading(false)
-          
-        }catch (err) {
-          console.log(err);
-          setLoading(false)
-        }
+        setMessageChange(true)
       }
     });
   }, []);
@@ -340,7 +335,7 @@ export default function Messenger() {
       }
 {console.log(currentChat)}
       {
-        activeTab===3? loading?<div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><CircularProgress size={10} color="black"/></div> :<div className="chatBox">
+        activeTab===3? loading || entireChatLoad?<div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><CircularProgress size={10} color="black"/></div> :<div className="chatBox">
         <div className="chatBoxWrapper">
           <div className="userChat">{currentChat?.revealed || currentChat?.members[0] === user?._id?activeChatUser?activeChatUser:null:"Anonymse"}</div>
           {currentChat ? (
