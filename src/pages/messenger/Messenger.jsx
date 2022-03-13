@@ -196,10 +196,26 @@ export default function Messenger() {
       const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
+      setLoading(true)
+    try{
+      let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
+        showRevealButton: true
+      })
+      setCurrentChat(res.data)
+      setLoading(false)
+
+    }catch (err) {
+      console.log(err);
+      setLoading(false)
+    }
     } catch (err) {
       console.log(err);
     }
   };
+
+  const setShowRevealedButtonToTrue =async ()=>{
+    
+  }
   const shownIdentityMessage = async () => {
    
     const message = {
@@ -229,7 +245,6 @@ export default function Messenger() {
           })
           setCurrentChat(res.data)
           setLoading(false)
-          window.location.reload();
     
         }catch (err) {
           console.log(err);
