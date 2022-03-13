@@ -18,7 +18,7 @@ export default function Topbar() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`/users/search?name=${searchTerm}`)
+      .get(`https://anonymse-backend.herokuapp.com/api/users/search?name=${searchTerm}`)
       .then((res) => {
         setData(res.data);
         setLoading(false);
