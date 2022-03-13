@@ -73,16 +73,7 @@ export default function Messenger() {
   async function callRefreshChat(){
     if(currentChat){
 
-      setLoading(true)
-      try{
-        let res =await axios.get(`https://anonymse-backend.herokuapp.com/api/conversations/single/${currentChat._id}`)
-        setCurrentChat(res.data)
-        setLoading(false)
-        
-      }catch (err) {
-        console.log(err);
-        setLoading(false)
-      }
+     
       
       
     }
@@ -120,7 +111,16 @@ export default function Messenger() {
       });
 
       if(data.text === "Who are you? reveal yourself!!" || data.text === "I just reveled myself, refresh your page"){
-        callRefreshChat()
+        setLoading(true)
+        try{
+          let res =await axios.get(`https://anonymse-backend.herokuapp.com/api/conversations/single/${currentChat._id}`)
+          setCurrentChat(res.data)
+          setLoading(false)
+          
+        }catch (err) {
+          console.log(err);
+          setLoading(false)
+        }
       }
     });
   }, []);
