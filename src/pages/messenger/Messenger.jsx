@@ -57,7 +57,6 @@ export default function Messenger() {
       })
       setCurrentChat(res.data)
       setLoading(false)
-      shownIdentityMessage();
 
     }catch (err) {
       console.log(err);
@@ -73,10 +72,10 @@ export default function Messenger() {
     setLoading(true);
     try {
       const res = await axios.post("https://anonymse-backend.herokuapp.com/api/conversations", userObj);
-      setLoading(false);
-      setCurrentChat(res)
-      setActiveTab(3)
-      setChatStarted(true)
+      await setLoading(false);
+      await setActiveTab(3)
+      await setCurrentChat(res)
+      await setChatStarted(true)
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -192,23 +191,24 @@ export default function Messenger() {
       text: "I just reveled myself, refresh your page",
       conversationId: currentChat._id,
     };
-
+    
     const receiverId = currentChat.members.find(
       (member) => member !== user._id
-    );
-
-    socket.current.emit("sendMessage", {
-      senderId: user._id,
-      receiverId,
-      text: "I just reveled myself, refresh your page",
-    });
-
-    try {
-      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
-      setMessages([...messages, res.data]);
-      setNewMessage("");
-    } catch (err) {
-      console.log(err);
+      );
+      
+      socket.current.emit("sendMessage", {
+        senderId: user._id,
+        receiverId,
+        text: "I just reveled myself, refresh your page",
+      });
+      
+      try {
+        const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
+        setMessages([...messages, res.data]);
+        setNewMessage("");
+        setConversationRevealed(currentChat._id)
+      } catch (err) {
+        console.log(err);
     }
   };
   useEffect(() => {
@@ -299,7 +299,7 @@ export default function Messenger() {
                   ></textarea>
                   {currentChat.revealed?null:
                   currentChat.members[0] === user._id ?<span className="mainQuestionText" onClick={()=>{
-                    setConversationRevealed(currentChat._id);
+                    shownIdentityMessage()
                     
                   }}>{loading?<CircularProgress size={10} color="black"/>:`Reveal yourself`}</span>:<span className="mainQuestionText" onClick={askForIdentity}>Ask for identity!</span>
                   
