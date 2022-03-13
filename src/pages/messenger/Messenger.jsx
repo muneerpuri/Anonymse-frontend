@@ -58,9 +58,7 @@ export default function Messenger() {
 
       setLoading(true)
       try{
-        let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
-          revealed: true
-        })
+        let res =await axios.get(`https://anonymse-backend.herokuapp.com/api/conversations/single/${currentChat._id}`)
         setCurrentChat(res.data)
         setLoading(false)
         
