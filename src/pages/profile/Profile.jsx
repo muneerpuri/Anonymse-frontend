@@ -13,9 +13,8 @@ import FollowingList from "../../components/FollowingList/FollowingList";
 import FollowersList from "../../components/FollowersList/FollowersList";
 import { useToasts } from "react-toast-notifications";
 export default function Profile() {
-
   const history = useHistory();
-  const { user: currentUser ,dispatch} = useContext(AuthContext);
+  const { user: currentUser, dispatch } = useContext(AuthContext);
   const [fileImg, setFileImg] = useState(null);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user, setUser] = useState({});
@@ -28,7 +27,9 @@ export default function Profile() {
   useEffect(() => {
     setRefetch(false);
     const fetchUser = async () => {
-      const res = await axios.get(`https://anonymse-backend.herokuapp.com/api/users?username=${username}`);
+      const res = await axios.get(
+        `https://anonymse-backend.herokuapp.com/api/users?username=${username}`
+      );
       setUser(res.data);
     };
     fetchUser();
@@ -46,14 +47,24 @@ export default function Profile() {
         data.append("file", fileToUpload);
         newPost.profilePicture = fileName;
         try {
-          await axios.post("https://anonymse-backend.herokuapp.com/api/upload", data);
+          await axios.post(
+            "https://anonymse-backend.herokuapp.com/api/upload",
+            data
+          );
         } catch (err) {}
       }
       setLoading(true);
       try {
-        await axios.put(`https://anonymse-backend.herokuapp.com/api/users/${currentUser._id}`, newPost);
-        addToast("Picture updated!", { appearance: "success" });
+        await axios.put(
+          `https://anonymse-backend.herokuapp.com/api/users/${currentUser._id}`,
+          newPost
+        );
+        addToast("Picture updated! please login again.", {
+          appearance: "success",
+        });
         setLoading(false);
+        dispatch({ type: "LOGOUT" });
+        history.push("/login");
       } catch (err) {
         setLoading(false);
       }
@@ -106,12 +117,14 @@ export default function Profile() {
                 <div className={classes.username}>
                   {user ? user.username : null}
                 </div>
-                <div className={classes.logoutLink} onClick={()=>{
-                  
-                  dispatch({type:"LOGOUT"})
-                  history.push('/login')
-                  }}>
-                      Logout
+                <div
+                  className={classes.logoutLink}
+                  onClick={() => {
+                    dispatch({ type: "LOGOUT" });
+                    history.push("/login");
+                  }}
+                >
+                  Logout
                 </div>
               </div>
             </div>
@@ -163,7 +176,7 @@ export default function Profile() {
 
         {activeTab === 1 && <FollowersList user={user} />}
 
-        {activeTab === 2 && <FollowingList user={user}/>}
+        {activeTab === 2 && <FollowingList user={user} />}
       </div>
     </>
   );

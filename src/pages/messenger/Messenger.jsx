@@ -58,6 +58,7 @@ export default function Messenger() {
       })
       setCurrentChat(res.data)
       setLoading(false)
+      window.location.reload();
 
     }catch (err) {
       console.log(err);
@@ -75,13 +76,17 @@ export default function Messenger() {
       const res = await axios.post("https://anonymse-backend.herokuapp.com/api/conversations", userObj);
       await setLoading(false);
       await setCurrentChat(res.data[0])
-      await setActiveTab(3)
+      setChatTab()
       await setChatStarted(true)
     } catch (err) {
       setLoading(false);
       console.log(err);
     }
     
+  }
+  async function setChatTab(){
+
+    await setActiveTab(3)
   }
   useEffect(() => {
     socket.current = io("https://anonymse-chat-backend.herokuapp.com/");
@@ -123,6 +128,7 @@ export default function Messenger() {
 
   useEffect(() => {
     setChatStarted(false)
+
     const getMessages = async () => {
       try {
         const res = await axios.get("https://anonymse-backend.herokuapp.com/api/messages/" + currentChat?._id);
