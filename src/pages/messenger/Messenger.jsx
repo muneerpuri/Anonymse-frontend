@@ -74,7 +74,7 @@ export default function Messenger() {
       const res = await axios.post("https://anonymse-backend.herokuapp.com/api/conversations", userObj);
       await setLoading(false);
       await setActiveTab(3)
-      await setCurrentChat(res)
+      await setCurrentChat(res.data[0])
       await setChatStarted(true)
     } catch (err) {
       setLoading(false);
