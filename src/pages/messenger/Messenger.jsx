@@ -356,7 +356,7 @@ export default function Messenger() {
                   onChange={(e) => setNewMessage(e.target.value)}
                   value={newMessage}
                   ></textarea>
-                  {currentChat?.revealed?null:
+                  {entireChatLoad?<CircularProgress size={10} color="black"/>:currentChat?.revealed?null:
                   currentChat.members[0] === user._id ?currentChat.showRevealButton?<span className="mainQuestionText" onClick={()=>{
                     shownIdentityMessage()
                     
