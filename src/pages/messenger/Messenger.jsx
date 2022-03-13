@@ -61,7 +61,6 @@ export default function Messenger() {
         })
         setCurrentChat(res.data)
         setLoading(false)
-        window.location.reload();
         
       }catch (err) {
         console.log(err);
