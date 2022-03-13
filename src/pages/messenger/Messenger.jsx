@@ -128,12 +128,14 @@ export default function Messenger() {
 
   useEffect(() => {
     setChatStarted(false)
-
+    setLoading(true)
     const getMessages = async () => {
       try {
         const res = await axios.get("https://anonymse-backend.herokuapp.com/api/messages/" + currentChat?._id);
         setMessages(res.data);
+        setLoading(false)
       } catch (err) {
+        setLoading(false)
         console.log(err);
       }
     };
@@ -283,7 +285,7 @@ export default function Messenger() {
       }
 {console.log(currentChat)}
       {
-        activeTab===3? <div className="chatBox">
+        activeTab===3? loading?<div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><CircularProgress size={10} color="black"/></div> :<div className="chatBox">
         <div className="chatBoxWrapper">
           <div className="userChat">{currentChat?.revealed || currentChat?.members[0] === user?._id?activeChatUser?activeChatUser:null:"Anonymse"}</div>
           {currentChat ? (
