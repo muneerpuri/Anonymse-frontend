@@ -2,12 +2,13 @@ import React from 'react'
 import classes from './FollowMessageBox.module.css'
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
-
 import { CircularProgress } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
 
+import { useHistory } from "react-router";
 
 function FollowMessageBox({user}) {
+  const history = useHistory()
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(false);
@@ -59,7 +60,7 @@ function FollowMessageBox({user}) {
         <button className={classes.follow} onClick={handleClick} >
             {followed?'Unfollow':'Follow'}
         </button>
-        {followed? <button className={classes.message}>
+        {followed? <button className={classes.message} onClick={()=>history.push('/messenger')}>
             Message
         </button>:null}
     </div>:null
