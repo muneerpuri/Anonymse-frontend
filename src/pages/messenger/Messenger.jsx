@@ -103,7 +103,7 @@ export default function Messenger() {
   }
   useEffect(async () => {
     socket.current = io("https://anonymse-chat-backend.herokuapp.com/",{ transports : ['websocket'] });
-    socket.current.on("getMessage", (data) => {
+    socket.current.on("getMessage",async (data) => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
@@ -153,7 +153,7 @@ export default function Messenger() {
     getConversations();
   }, [user._id,activeTab]);
 
-  useEffect(() => {
+  useEffect(async () => {
     setChatStarted(false)
     setLoading(true)
     const getMessages = async () => {
