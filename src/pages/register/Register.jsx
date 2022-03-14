@@ -30,6 +30,7 @@ export default function Register() {
     }
   };
 
+  
   return (
     <div className={classes.root}>
       <form className={classes.formBodyBox} onSubmit={handleClick}>
