@@ -165,7 +165,6 @@ export default function Messenger() {
   }, [currentChat,activeTab,chatStarted]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessageChange(true)
     const message = {
       sender: user._id,
       text: newMessage,
