@@ -15,7 +15,7 @@ const { showSearchMenu ,dispatch} = React.useContext(AuthContext);
   React.useEffect(()=>{
     setLoading(true);
     axios
-      .get(`https://anonymse-backend.herokuapp.com/api/users/search?name=${searchTerm}`)
+      .get(`${process.env.REACT_APP_BACKEND}/api/users/search?name=${searchTerm}`)
       .then((res) => {
         setData(res.data);
         setLoading(false);

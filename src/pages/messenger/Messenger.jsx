@@ -7,6 +7,8 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { CircularProgress } from "@material-ui/core";
+
+import {Delete} from '@material-ui/icons'
 import React from "react";
 export default function Messenger() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -27,11 +29,13 @@ export default function Messenger() {
   const [chatStarted,setChatStarted] = React.useState(false)
   const [messageChange,setMessageChange] = React.useState(false)
   const [entireChatLoad,setEntireChatLoad] = React.useState(false)
+  const [deleteChatId, setDeleteChatId] = React.useState(null);
+  const [refresh,setRefreshLoading] = React.useState(false)
   const getFriends = async (val) => {
     setLoading(true);
     try {
       const friendList = await axios.get(
-        `https://anonymse-backend.herokuapp.com/api/users/messengerchat/` + user._id + `?name=${val}`
+        `${process.env.REACT_APP_BACKEND}/api/users/messengerchat/` + user._id + `?name=${val}`
       );
       setFriends(friendList.data);
       setLoading(false);
@@ -40,10 +44,34 @@ export default function Messenger() {
       console.log(err);
     }
   };
+
+  useEffect(async()=>{
+    if(deleteChatId){
+
+      setLoading(true)
+      try{
+        let res =await axios.delete(`${process.env.REACT_APP_BACKEND}/api/conversations/single/${deleteChatId}/${user._id}`)
+        setConversations(res.data);
+        setLoading(false)
+        setEntireChatLoad(false)
+      }catch (err) {
+        console.log(err);
+        setLoading(false)
+
+        setEntireChatLoad(false)
+      }
+      
+      
+    }
+
+  },[deleteChatId])
+
+
+
   const chatUserId = async (val)=>{
     setLoading(true);
     try {
-      const res = await axios.get(`https://anonymse-backend.herokuapp.com/api/users/chat/${val}`);
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND}/api/users/chat/${val}`);
       setLoading(false);
       setActiveChatUser(res.data)
       console.log(res.data)
@@ -57,16 +85,12 @@ export default function Messenger() {
     setMessageChange(false)
     if(currentChat){
       setEntireChatLoad(true)
-
-      setLoading(true)
       try{
-        let res =await axios.get(`https://anonymse-backend.herokuapp.com/api/conversations/single/${currentChat._id}`)
+        let res =await axios.get(`${process.env.REACT_APP_BACKEND}/api/conversations/single/${currentChat._id}`)
         setCurrentChat(res.data)
-        setLoading(false)
         setEntireChatLoad(false)
       }catch (err) {
         console.log(err);
-        setLoading(false)
 
         setEntireChatLoad(false)
       }
@@ -74,6 +98,28 @@ export default function Messenger() {
       
     }
   },[messageChange])
+
+
+ 
+
+  async function updateChatData(){
+    if(currentChat){
+
+      setRefreshLoading(true)
+      try{
+        let res =await axios.get(`${process.env.REACT_APP_BACKEND}/api/conversations/single/${currentChat._id}`)
+        setCurrentChat(res.data)
+        setRefreshLoading(false)
+      }catch (err) {
+        console.log(err);
+        setRefreshLoading(false)
+      }
+      
+      
+    }
+  }
+
+
   async function callRefreshChat(){
     if(currentChat){
 
@@ -90,7 +136,7 @@ export default function Messenger() {
     }
     setLoading(true);
     try {
-      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/conversations", userObj);
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND}/api/conversations`, userObj);
       await setLoading(false);
       await setCurrentChat(res.data[0])
       setChatTab()
@@ -114,7 +160,7 @@ export default function Messenger() {
         createdAt: Date.now(),
       });
 
-      if(data.text === "Who are you? reveal yourself!! [send a message to get 'Reveal yoursel button'.]" || data.text === "I just reveled myself, [send a message to find out who am I!!]"){
+      if(data.text === "I just reveled myself, [Press 'Refresh'  to find out who am I!!]" || data.text === "I just reveled myself, [Press 'Refresh' to find out who am I!!]"){
         setMessageChange(true)
       }
     });
@@ -139,7 +185,7 @@ export default function Messenger() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("https://anonymse-backend.herokuapp.com/api/conversations/" + user._id);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND}/api/conversations/` + user._id);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -153,7 +199,7 @@ export default function Messenger() {
     setLoading(true)
     const getMessages = async () => {
       try {
-        const res = await axios.get("https://anonymse-backend.herokuapp.com/api/messages/" + currentChat?._id);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND}/api/messages/` + currentChat?._id);
         setMessages(res.data);
         setLoading(false)
       } catch (err) {
@@ -182,7 +228,7 @@ export default function Messenger() {
     });
 
     try {
-      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND}/api/messages`, message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -193,7 +239,7 @@ export default function Messenger() {
     e.preventDefault();
     const message = {
       sender: user._id,
-      text: "Who are you? reveal yourself!! [send a message to get 'Reveal yoursel button'.]",
+      text: "I just reveled myself, [Press 'Refresh'  to find out who am I!!]",
       conversationId: currentChat._id,
     };
 
@@ -204,16 +250,16 @@ export default function Messenger() {
     socket.current.emit("sendMessage", {
       senderId: user._id,
       receiverId,
-      text: "Who are you? reveal yourself!! [send a message to get 'Reveal yoursel button'.]",
+      text: "I just reveled myself, [Press 'Refresh'  to find out who am I!!]",
     });
 
     try {
-      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND}/api/messages`, message);
       setMessages([...messages, res.data]);
       setNewMessage("");
       setLoading(true)
     try{
-      let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
+      let res =await axios.put(`${process.env.REACT_APP_BACKEND}/api/conversations/${currentChat._id}`, {
         showRevealButton: true
       })
       setCurrentChat(res.data)
@@ -235,7 +281,7 @@ export default function Messenger() {
    
     const message = {
       sender: user._id,
-      text: "I just reveled myself, [send a message to find out who am I!!]",
+      text: "I just reveled myself, [Press 'Refresh' to find out who am I!!]",
       conversationId: currentChat._id,
     };
     
@@ -246,17 +292,17 @@ export default function Messenger() {
       socket.current.emit("sendMessage", {
         senderId: user._id,
         receiverId,
-        text:"I just reveled myself, [send a message to find out who am I!!]",
+        text:"I just reveled myself, [Press 'Refresh' to find out who am I!!]",
       });
       
       try {
 
-        const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND}/api/messages`, message);
         setMessages([...messages, res.data]);
         setNewMessage("");
         setLoading(true)
         try{
-          let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
+          let res =await axios.put(`${process.env.REACT_APP_BACKEND}/api/conversations/${currentChat._id}`, {
             revealed: true
           })
           setCurrentChat(res.data)
@@ -319,16 +365,24 @@ export default function Messenger() {
       }
 
       {
-        activeTab===1? <div className="chatMenuWrapper">
+        activeTab===1?loading?<div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><CircularProgress size={10} color="black"/></div> : <div className="chatMenuWrapper">
            
         {conversations.map((c) => (
-          <div onClick={() => {
+          <div style={{display:"flex",justifyContent:"flex-start",alignItems:"center"}}>
+          <div  onClick={() => {
             setActiveTab(3)
             setCurrentChat(c)
             let userId = c.members.filter(e=>e !== user._id)
             chatUserId(userId)
             }}>
-            <Conversation conversation={c} currentUser={user} />
+            <Conversation setDeleteChatId={setDeleteChatId} conversation={c} currentUser={user} />
+        
+          </div>
+          <div style={{display:"flex",justifyContent:"flex-start",alignItems:"center"}}>
+                <span  onClick={()=>{
+        setDeleteChatId(c._id)
+      }} style={{display:"flex",justifyContent:"center",alignItems:"center"}}><Delete style={{color:"red"}}/></span>
+          </div>
           </div>
         ))}
       </div>:null
@@ -337,7 +391,9 @@ export default function Messenger() {
       {
         activeTab===3? loading || entireChatLoad?<div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><CircularProgress size={10} color="black"/></div> :<div className="chatBox">
         <div className="chatBoxWrapper">
-          <div className="userChat">{currentChat?.revealed || currentChat?.members[0] === user?._id?activeChatUser?activeChatUser:null:"Anonymse"}</div>
+         <div className="userChatParent"> <div className="userChat">{currentChat?.revealed || currentChat?.members[0] === user?._id?activeChatUser?activeChatUser:null:"Anonymse"}</div> <div>{refresh?<CircularProgress size={10} color="black"/>:<button onClick={()=>{
+           updateChatData()
+         }} style={{border:'none',background:'white',color:'black',padding:"10px",cursor:"pointer"}}>Refresh</button>}</div></div>
           {currentChat ? (
             <>
               <div className="chatBoxTop">

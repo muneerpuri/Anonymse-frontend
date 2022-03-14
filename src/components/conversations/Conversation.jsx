@@ -11,7 +11,7 @@ export default function Conversation({ conversation, currentUser }) {
 
     const getUser = async () => {
       try {
-        const res = await axios("https://anonymse-backend.herokuapp.com/api/users?userId=" + friendId);
+        const res = await axios(`${process.env.REACT_APP_BACKEND}/api/users?userId=` + friendId);
         setUser(res.data);
       } catch (err) {
         console.log(err);

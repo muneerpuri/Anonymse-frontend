@@ -15,7 +15,7 @@ function FollowingList({user}) {
     setLoading(true)
     const getFriends = async () => {
       try {
-        const friendList = await axios.get("https://anonymse-backend.herokuapp.com/api/users/friends/" + user._id);
+        const friendList = await axios.get(`${process.env.REACT_APP_BACKEND}/api/users/friends/` + user._id);
         setFriends(friendList.data);
         setLoading(false)
       } catch (err) {

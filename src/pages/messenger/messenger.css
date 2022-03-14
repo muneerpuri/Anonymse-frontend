@@ -14,9 +14,19 @@
   overflow-y: hidden;
   margin: auto;
 }
-.userChat{
+.userChatParent{
   width: 90%;
   padding: 10px;
+  color: black;
+  text-decoration: underline;
+  background: white;
+  font-size: 30px;
+  font-family: 'Pacifico', cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.userChat{
   color: black;
   text-decoration: underline;
   background: white;
