@@ -21,7 +21,7 @@ export default function Post({ post ,setRefetch}) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`https://anonymse-backend.herokuapp.com/api/users?userId=${post.userId}`);
+      const res = await axios.get(`https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/users?userId=${post.userId}`);
       setUser(res.data);
     };
     fetchUser();
@@ -29,7 +29,7 @@ export default function Post({ post ,setRefetch}) {
 
   const likeHandler = () => {
     try {
-      axios.put("https://anonymse-backend.herokuapp.com/api/posts/" + post._id + "/like", { userId: currentUser._id });
+      axios.put("https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/posts/" + post._id + "/like", { userId: currentUser._id });
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
@@ -38,7 +38,7 @@ export default function Post({ post ,setRefetch}) {
   const DeletePostHandler = (id) =>{
     setLoading(true)
     try {
-      axios.delete(`https://anonymse-backend.herokuapp.com/api/posts/${id}`,{data: { userId: currentUser._id }}).then((_)=>{
+      axios.delete(`https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/posts/${id}`,{data: { userId: currentUser._id }}).then((_)=>{
 
         setLoading(false)
         setRefetch(true)

@@ -31,7 +31,7 @@ export default function Messenger() {
     setLoading(true);
     try {
       const friendList = await axios.get(
-        `https://anonymse-backend.herokuapp.com/api/users/messengerchat/` + user._id + `?name=${val}`
+        `https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/users/messengerchat/` + user._id + `?name=${val}`
       );
       setFriends(friendList.data);
       setLoading(false);
@@ -43,7 +43,7 @@ export default function Messenger() {
   const chatUserId = async (val)=>{
     setLoading(true);
     try {
-      const res = await axios.get(`https://anonymse-backend.herokuapp.com/api/users/chat/${val}`);
+      const res = await axios.get(`https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/users/chat/${val}`);
       setLoading(false);
       setActiveChatUser(res.data)
       console.log(res.data)
@@ -60,7 +60,7 @@ export default function Messenger() {
 
       setLoading(true)
       try{
-        let res =await axios.get(`https://anonymse-backend.herokuapp.com/api/conversations/single/${currentChat._id}`)
+        let res =await axios.get(`https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/conversations/single/${currentChat._id}`)
         setCurrentChat(res.data)
         setLoading(false)
         setEntireChatLoad(false)
@@ -90,7 +90,7 @@ export default function Messenger() {
     }
     setLoading(true);
     try {
-      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/conversations", userObj);
+      const res = await axios.post("https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/conversations", userObj);
       await setLoading(false);
       await setCurrentChat(res.data[0])
       setChatTab()
@@ -106,7 +106,7 @@ export default function Messenger() {
     await setActiveTab(3)
   }
   useEffect(async () => {
-    socket.current = io("https://anonymse-chat-backend.herokuapp.com/",{ transports : ['websocket'] });
+    socket.current = io("https://muneer-cors.herokuapp.com/https://anonymse-chat-backend.herokuapp.com/",{ transports : ['websocket'] });
     socket.current.on("getMessage",async (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -139,7 +139,7 @@ export default function Messenger() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("https://anonymse-backend.herokuapp.com/api/conversations/" + user._id);
+        const res = await axios.get("https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/conversations/" + user._id);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -153,7 +153,7 @@ export default function Messenger() {
     setLoading(true)
     const getMessages = async () => {
       try {
-        const res = await axios.get("https://anonymse-backend.herokuapp.com/api/messages/" + currentChat?._id);
+        const res = await axios.get("https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/messages/" + currentChat?._id);
         setMessages(res.data);
         setLoading(false)
       } catch (err) {
@@ -183,7 +183,7 @@ export default function Messenger() {
     });
 
     try {
-      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
+      const res = await axios.post("https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -209,12 +209,12 @@ export default function Messenger() {
     });
 
     try {
-      const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
+      const res = await axios.post("https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
       setLoading(true)
     try{
-      let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
+      let res =await axios.put(`https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
         showRevealButton: true
       })
       setCurrentChat(res.data)
@@ -251,12 +251,12 @@ export default function Messenger() {
       });
       
       try {
-        const res = await axios.post("https://anonymse-backend.herokuapp.com/api/messages", message);
+        const res = await axios.post("https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/messages", message);
         setMessages([...messages, res.data]);
         setNewMessage("");
         setLoading(true)
         try{
-          let res =await axios.put(`https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
+          let res =await axios.put(`https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/conversations/${currentChat._id}`, {
             revealed: true
           })
           setCurrentChat(res.data)
