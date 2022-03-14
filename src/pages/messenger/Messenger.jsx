@@ -106,7 +106,7 @@ export default function Messenger() {
     await setActiveTab(3)
   }
   useEffect(async () => {
-    socket.current = io("https://muneer-cors.herokuapp.com/https://anonymse-chat-backend.herokuapp.com/",{ transports : ['websocket'] });
+    socket.current = io("https://anonymse-chat-backend.herokuapp.com/",{ transports : ['websocket'] });
     socket.current.on("getMessage",async (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -251,7 +251,7 @@ export default function Messenger() {
       });
       
       try {
-        
+
         const res = await axios.post("https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/messages", message);
         setMessages([...messages, res.data]);
         setNewMessage("");
