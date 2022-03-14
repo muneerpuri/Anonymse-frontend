@@ -22,7 +22,7 @@ export default function Register() {
         password: password.current.value,
       };
       try {
-        await axios.post("https://muneer-cors.herokuapp.com/https://anonymse-backend.herokuapp.com/api/auth/register", user);
+        await axios.post("https://anonymse-backend.herokuapp.com/api/auth/register", user);
         history.push("/login");
       } catch (err) {
         console.log(err);
@@ -30,7 +30,7 @@ export default function Register() {
     }
   };
 
-  
+
   return (
     <div className={classes.root}>
       <form className={classes.formBodyBox} onSubmit={handleClick}>
